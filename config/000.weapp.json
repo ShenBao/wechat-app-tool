@@ -1,0 +1,11 @@
+{
+    "dist": "000.weapp",
+    "appid": "wx5069365538e464b8",
+    "version": "1.1.32",
+    "description": "小程序应用",
+    "projectname": "000.小程序应用-模板产生",
+    "navigationBarTitleText": " 小程序应用",
+    "fundebugApiKey": "",
+    "aldstatAppKey": "",
+    "pageSize": 20
+}
