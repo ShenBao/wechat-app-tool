@@ -1,6 +1,8 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
+
+import wxRequest from '../../requests/wxRequest';
 
 Page({
   data: {
@@ -16,6 +18,13 @@ Page({
     })
   },
   onLoad: function () {
+
+    wxRequest({
+      showLoading: true,
+      appIdVersion: true,
+      isAuth: true
+    }, 'https://cnodejs.org/api/v1/topics');
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
