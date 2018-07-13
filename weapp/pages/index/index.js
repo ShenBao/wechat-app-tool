@@ -19,11 +19,14 @@ Page({
   },
   onLoad: function () {
 
-    wxRequest({
+      let requestTask = wxRequest({
       showLoading: true,
       appIdVersion: true,
       isAuth: true
     }, 'https://cnodejs.org/api/v1/topics');
+
+    // 取消请求任务
+    // requestTask.abort();
 
     if (app.globalData.userInfo) {
       this.setData({

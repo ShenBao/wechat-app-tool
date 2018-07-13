@@ -1,7 +1,7 @@
 import config from '../config/config';
 import urlUtils from '../utils/url-utils';
 
-const appIdVersion = {
+const appIdVersionConfig = {
     appid: config.appid,
     version: config.version
 };
@@ -48,8 +48,9 @@ function wxRequest(opts, url) {
     header = header || {
         'content-type': 'application/json'
     };
+    dataType = dataType || 'json';
     // 添加 appIdVersion 默认为true
-    appIdVersion = appIdVersion || true;
+    appIdVersion = appIdVersionConfig || true;
     // 登录态 默认为 false
     isAuth = isAuth || false;
     // 是否显示loading 默认为 false
@@ -79,9 +80,18 @@ function wxRequest(opts, url) {
         };
     }
 
-    success = typeof obj.success == 'function' ? success : () => {};
-    fail = typeof obj.fail == 'function' ? fail : () => {};
-    complete = typeof obj.complete == 'function' ? complete : () => {};
+    success = typeof success == 'function'
+        ? success
+        : () => {};
+    fail = typeof fail == 'function'
+        ? fail
+        : () => {};
+    complete = typeof complete == 'function'
+        ? complete
+        : () => {};
+
+    console.log(`------------ request ${reqUrl} ------------`);
+    console.log('reqUrl:', reqUrl, ', data', data, ', method:', method, ', dataType:', dataType, ', header:', header);
 
     return wx.request({
         url: reqUrl,
@@ -90,7 +100,6 @@ function wxRequest(opts, url) {
         dataType: dataType,
         header: header,
         success: (res) => {
-            console.log('success:', res);
             success(res);
         },
         fail: (res) => {
@@ -98,7 +107,11 @@ function wxRequest(opts, url) {
             fail(res);
         },
         complete: (res) => {
-            console.log('complete:', res);
+
+            console.log('complete res:', res);
+            let {statusCode, errMsg, header, data} = res;
+            console.log('statusCode:', statusCode, ', errMsg:', errMsg, ', header:', header, ', data:', data);
+
             complete(res);
             if (showLoading) {
                 wx.hideLoading();
@@ -106,7 +119,5 @@ function wxRequest(opts, url) {
         }
     });
 };
-
-// wxRequest.abort() // 取消请求任务
 
 export default wxRequest;
