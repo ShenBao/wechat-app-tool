@@ -1,8 +1,8 @@
 /*
- * @Author: ShenBao 
- * @Date: 2018-07-010 16:35:57 
+ * @Author: ShenBao
+ * @Date: 2018-07-010 16:35:57
  * @Last Modified by: ShenBao
- * @Last Modified time: 2018-07-11 23:35:07
+ * @Last Modified time: 2018-07-16 16:41:52
 */
 
 const fs = require('fs');
@@ -48,7 +48,7 @@ class buildHandler {
             pageSize: config.pageSize
         };
 
-        const _configString = JSON.stringify(_config);
+        const _configString = JSON.stringify(_config, null, 4)
 
         const fileString = `const config = ${_configString};
         module.exports = config;`;
@@ -163,7 +163,7 @@ class buildHandler {
             }
             const appJson = JSON.parse(data);
             appJson.window.navigationBarTitleText = this.config.navigationBarTitleText;
-            const appJsonString = JSON.stringify(appJson);
+            const appJsonString = JSON.stringify(appJson, null, 4);
             fs.writeFileSync(`./dist/${this.config.dist}/app.json`, appJsonString);
 
             console.log(`-------------- appJson success`);
@@ -188,7 +188,7 @@ class buildHandler {
             projectConfig.description = this.config.description;
             projectConfig.appid = this.config.appid;
             projectConfig.projectname = this.config.projectname;
-            const projectConfigString = JSON.stringify(projectConfig);
+            const projectConfigString = JSON.stringify(projectConfig, null, 4);
 
             fs.writeFileSync(`./dist/${this.config.dist}/project.config.json`, projectConfigString);
 
@@ -214,7 +214,10 @@ class buildHandler {
 
         const configJson = this.config;
 
-        const configString = JSON.stringify(configJson);
+        configJson.setVersionUrl = `http://host.cn/setting/mini-version.json?appid=${this.config.appid}&version=${this.config.version}`;
+        configJson.delVersionUrl = `http://host.cn/setting/mini-version.json?appid=${this.config.appid}&version=0`;
+
+        const configString = JSON.stringify(configJson, null, 4);
 
         fs.writeFileSync(configPath, configString);
 

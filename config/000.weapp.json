@@ -1,11 +1,13 @@
 {
     "dist": "000.weapp",
     "appid": "wx5069365538e464b8",
-    "version": "1.1.32",
+    "version": "1.1.58",
     "description": "小程序应用",
-    "projectname": "000.小程序应用-模板产生",
+    "projectname": "000.小程序应用",
     "navigationBarTitleText": " 小程序应用",
     "fundebugApiKey": "",
     "aldstatAppKey": "",
-    "pageSize": 20
+    "pageSize": 20,
+    "setVersionUrl": "http://host.cn/setting/mini-version.json?appid=wx5069365538e464b8&version=1.1.58",
+    "delVersionUrl": "http://host.cn/setting/mini-version.json?appid=wx5069365538e464b8&version=0"
 }

@@ -2,7 +2,7 @@
  * @Author: ShenBao
  * @Date: 2018-07-010 16:35:57
  * @Last Modified by: ShenBao
- * @Last Modified time: 2018-07-14 13:42:19
+ * @Last Modified time: 2018-07-16 14:35:21
 */
 
 const gulp = require('gulp');
@@ -28,7 +28,7 @@ const sassStyleHandler = (entry, output) => {
         .src(entry)
         .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
         .pipe(autoprefixer())
-        .pipe(cssmin({advanced: true, keepSpecialComments: '*'}))
+        .pipe(cssmin({advanced: false, keepSpecialComments: '*'}))
         .pipe(rename({extname: ".wxss"}))
         .pipe(gulp.dest(output));
 };
